@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+</body>
+<script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    
+  let rootElement = document.getElementById("root")
+
+  function Image({src}){
+    console.log(src);
+    return <img src={src} alt="gallery image" style = {{border:'1px solid red'}}/>
+  }
+
+  function Gallery({children}){
+    console.log(children);
+    return (
+        <div style = {{display:'grid', gridTemplateColumns: 'repeat(3,1fr)', gap:'10px'}} >
+        {children}    
+        </div>
+    )
+
+  }
+
+
+  function App(){
+      return (
+        <>
+        <Gallery>
+        <Image src="https://masai-website-images.s3.ap-south-1.amazonaws.com/Kulin_Shah_Onsurity_0dd3a1802f.jpg"/>
+        <Image src="https://masai-website-images.s3.ap-south-1.amazonaws.com/Sharda_Balaji_Novojuris_2a206f2f88.jpg"/>
+        <Image src="https://masai-website-images.s3.ap-south-1.amazonaws.com/Harshvardhan_Lunia_Lendingkart_44d72a6fcd.jpg"/>
+        <Image src="https://masai-website-images.s3.ap-south-1.amazonaws.com/Anurag_Jain_Kredx_b6ed6a31c6.jpg"/>
+        <Image src="https://masai-website-images.s3.ap-south-1.amazonaws.com/Abhishek_Goyal_tracxn_5b2f61d87d.jpg"/>
+        </Gallery>
+        </>
+      )
+  }
+  
+  ReactDOM.createRoot(rootElement).render(<App/>)
+    
+  </script>
+</html>
