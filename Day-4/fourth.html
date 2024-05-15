@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <style>
+    .main{
+        padding: 20px;
+        margin-left: 35%;
+        margin-top: 10%;
+      
+    }
+   input{
+    padding: 10px;
+    border-radius: 10px;
+   }
+   button{
+    padding: 10px;
+    margin-left: 20px;
+    border-radius: 10px;
+   }
+   .check{
+   
+    width: 15%;
+   
+   }
+   
+  </style>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+   let rootElement = document.getElementById("root")
+
+   function TodoList(){
+    const [todos, setTodos] = React.useState([])
+    const [newTodo, setNewTodo] = React.useState("")
+
+    const AddTodo = ()=>{
+        setTodos([...todos, {id: Date.now(), text: newTodo, completed: false}])
+        console.log(setTodos);
+        setNewTodo("")
+      
+    }
+
+    const toggleTodo = (id)=>{
+        setTodos(prevTodo => prevTodo.map(todo=> todo.id === id ? {...todo, completed: !todo.completed}:todo))
+    }
+
+    const removeTodo = (id)=>{
+        setTodos(prevTodo => prevTodo.filter(todo=> todo.id !== id))
+    }
+   
+       return (<div className = "main">
+           <input type="text" value = {newTodo} onChange = {(event)=> setNewTodo(event.target.value)}/>
+           <button onClick = {AddTodo}>Add Todo</button>
+           
+           <ol>
+            {todos.map(function(todo,index){
+                return <li key = {index}>
+                       <input type="checkbox" checked = {todo.completed}  onChange = {()=> toggleTodo(todo.id)} className = "check"/>
+                       <span>{todo.text}</span>
+                       <button onClick = {()=> removeTodo(todo.id)}>Delete</button>
+                    </li>
+            })}
+            </ol>
+           
+       </div>)
+   }
+
+   ReactDOM.createRoot(rootElement).render(<TodoList/>)
+  </script>
+</html>
