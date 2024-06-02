@@ -11,20 +11,29 @@ function Posts() {
 
   async function fetchAndUpdateData() {
     {
-      /*Complete the missing code*/
+      setLoading(true)
+      setError(false)
     }
     try {
       {
-        /*Complete the missing code*/
+        let res = await axios({
+          method : "get",
+          url : "https://jsonplaceholder.typicode.com/posts"
+         })
+         setPosts(res.data)
+         setLoading(false)
       }
     } catch (error) {
       {
-        /*Complete the missing code*/
+        setError(true)
+        setLoading(false)
       }
     }
   }
 
-  useEffect(/*Complete the missing code*/);
+  useEffect(()=>{
+    fetchAndUpdateData()
+  },[]);
 
   if (loading) {
     return <LoadingIndicator />;
@@ -38,7 +47,11 @@ function Posts() {
     <div>
       <h1>List of Posts</h1>
 
-      {/*Complete the missing code*/}
+      {posts.map(function(post,index){
+        return <div style={{border : "1px dashed black", margin:"20px", padding:"20px"}}>
+          <Post {...post} key = {index}/>
+        </div>
+      })}
     </div>
   );
 }

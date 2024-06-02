@@ -6,8 +6,21 @@ function StopWatch() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    /*Complete the missing code*/
-  }, []);
+   
+    const intervalId = setInterval(()=>{
+          setCount((prevCount)=>{
+            if(prevCount == 9){
+              clearInterval(intervalId)
+            }
+            return prevCount + 1
+          })
+    },1000);
+  
+    function cleanupFunction(){
+      clearInterval(intervalId)
+    }
+    return cleanupFunction
+    }, []);
 
   return (
     <div style={{ border: "1px dashed red", padding: "10px", margin: "10px" }}>

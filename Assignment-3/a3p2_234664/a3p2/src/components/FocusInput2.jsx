@@ -6,9 +6,8 @@ function FocusInput2() {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    // complete the missing code
+    inputRef.current.focus()
   }, []);
-
   return (
     <div>
       <input
